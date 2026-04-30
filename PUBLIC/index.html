@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>AlvirBCGProMax</title>
+
+  <link rel="stylesheet" href="./style.css">
+
+  <!-- Libraries -->
+  <script src="https://cdn.jsdelivr.net/gh/davidshimjs/qrcodejs/qrcode.min.js"></script>   
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jsbarcode/3.11.6/JsBarcode.all.min.js"></script>
+  <script src="./script.js" defer></script>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fjalla+One&family=Roboto+Condensed:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+  <div class="app">
+
+    <header class="header">
+      <h2>APBG</h2>
+      <h1>Alvir's Pro Bulk Barcode Generator</h1>
+      <p>Hola! Si quieres solicitar más features o tienes alguna idea no dudes en contactar a Alvir</p>
+      <br>
+      <p>FUNCIONAMIENTO: </p>
+      <p style="text-size:15px">Ingresa una lista de guías y presiona el botón</p>
+    </header>
+
+    <section class="input_container">
+      <textarea id="lista_guias" placeholder="123456&#10;ABC123&#10;HELLO123"></textarea>
+      <button onclick="Create_Results()">Generar códigos 🚀</button>
+    </section>
+
+    <section class="results" id="result_container"></section>
+
+  </div>
+
+</body>
+</html>
