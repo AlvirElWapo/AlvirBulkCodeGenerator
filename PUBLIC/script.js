@@ -13,6 +13,7 @@ async function Create_Results() {
   }
 }
 
+
 async function createCodeCard(code) {
   const container = document.getElementById("result_container");
 
@@ -23,7 +24,6 @@ async function createCodeCard(code) {
   card.style.alignItems = "center";
   card.style.gap = "18px";
 
-
   const label = document.createElement("div");
   label.className = "code-text";
   label.textContent = code;
@@ -32,9 +32,7 @@ async function createCodeCard(code) {
 
   const barcodeSvg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
 
-  // QR container (qrcodejs creates its own canvas/img inside)
   const qrDiv = document.createElement("div");
-
 
   new QRCode(qrDiv, {
     text: code,
@@ -54,9 +52,34 @@ async function createCodeCard(code) {
     background: "#ffffff"
   });
   barcodeSvg.style.marginTop = "18px";
-
   card.appendChild(label);
   card.appendChild(qrDiv);
   card.appendChild(barcodeSvg);
+
+  selected_codes = document.getElementById("selected_codes");
+
+  card.addEventListener("click", () => {
+    card.classList.toggle("active");
+
+
+    if (card.classList.contains("active")) {
+      selected_codes.value += code + "\n";
+    } else {
+      const lines = selected_codes.value.split("\n").filter(line => line.trim() !== code);
+      selected_codes.value = lines.join("\n");
+    }
+
+  });
+
+
+
+
+
+
   container.appendChild(card);
 }
+
+
+
+
+
