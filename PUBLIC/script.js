@@ -1,4 +1,8 @@
+let currentIndex = -1;
+
+
 async function Create_Results() {
+  currentIndex = -1;
   const textarea = document.getElementById("lista_guias");
   const container = document.getElementById("result_container");
   container.innerHTML = "";
@@ -12,6 +16,30 @@ async function Create_Results() {
     await createCodeCard(code);
   }
 }
+
+function focusCard(index) {
+  const cards = document.querySelectorAll(".code-card");
+  if (cards.length === 0) return;
+
+  // keep index inside bounds
+  if (index < 0) index = 0;
+  if (index >= cards.length) index = cards.length - 1;
+
+  currentIndex = index;
+
+  const card = cards[currentIndex];
+
+  card.scrollIntoView({
+    behavior: "smooth",
+    block: "center"
+  });
+
+  card.style.boxShadow = "0 0 0 3px #ff8c42";
+  setTimeout(() => {
+    card.style.boxShadow = "";
+  }, 500);
+}
+
 
 
 async function createCodeCard(code) {
@@ -34,14 +62,14 @@ async function createCodeCard(code) {
 
   const qrDiv = document.createElement("div");
 
-  new QRCode(qrDiv, {
-    text: code,
-    width: 180,
-    height: 180,
-    colorDark: "#000000",
-    colorLight: "#ffffff",
-    correctLevel: QRCode.CorrectLevel.M
-  });
+new QRCode(qrDiv, {
+  text: code,
+  width: 200,
+  height: 200,
+  colorDark: "#000000",
+  colorLight: "#ffffff",
+  correctLevel: QRCode.CorrectLevel.H   
+});
 
   JsBarcode(barcodeSvg, code, {
     format: "CODE128",
@@ -70,16 +98,36 @@ async function createCodeCard(code) {
     }
 
   });
-
-
-
-
-
-
   container.appendChild(card);
 }
 
 
 
 
+document.getElementById("scroll_down").onclick = () => {
+  focusCard(currentIndex + 1);
+};
 
+document.getElementById("scroll_up").onclick = () => {
+  focusCard(currentIndex - 1);
+};
+
+window.addEventListener("keydown", (e) => {
+
+  const activeElement = document.activeElement;
+  const typingInTextarea = activeElement.tagName === "TEXTAREA";
+
+  // Only navigate when NOT typing
+  if (!typingInTextarea) {
+    if (e.key === "ArrowDown") {
+      e.preventDefault();
+      focusCard(currentIndex + 1);
+    }
+
+    if (e.key === "ArrowUp") {
+      e.preventDefault();
+      focusCard(currentIndex - 1);
+    }
+  }
+
+});
