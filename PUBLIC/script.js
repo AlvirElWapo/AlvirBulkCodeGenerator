@@ -93,7 +93,6 @@ async function createCodeCard(code) {
     });
 
     card.appendChild(qrDiv);
-  }
 
   JsBarcode(barcodeSvg, code, {
     format: "CODE128",
@@ -107,6 +106,22 @@ async function createCodeCard(code) {
   barcodeSvg.style.marginTop = "18px";
 
   card.appendChild(barcodeSvg);
+  }else{
+  JsBarcode(barcodeSvg, code, {
+    format: "CODE128",
+    width: 4,
+    height: 140,
+    displayValue: true,
+    lineColor: "#000000",
+    background: "#ffffff"
+  });
+
+  barcodeSvg.style.marginTop = "36px";
+
+  card.appendChild(barcodeSvg);
+
+  }
+
 
   const selected_codes = document.getElementById("selected_codes");
 
