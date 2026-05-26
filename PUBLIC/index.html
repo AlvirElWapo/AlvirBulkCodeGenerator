@@ -31,12 +31,27 @@
 
     </header>
 
-    <section class="input_container">
-      <textarea id="lista_guias" placeholder="123456&#10;ABC123&#10;HELLO123"></textarea>
-      <textarea id="selected_codes" readonly placeholder="Las guías seleccionadas aparecerán aquí."></textarea>
-      <button onclick="Create_Results()">Generar códigos 🚀</button>
-    </section>
 
+<section class="input_container">
+  <textarea id="lista_guias" placeholder="123456&#10;ABC123&#10;HELLO123"></textarea>
+
+  <textarea id="selected_codes" readonly placeholder="Las guías seleccionadas aparecerán aquí."></textarea>
+
+  <div class="print-mode-toggle">
+    <span class="toggle-label">Modo:</span>
+
+    <label class="toggle-switch">
+      <input type="checkbox" id="barcode_only_toggle">
+      <span class="slider"></span>
+    </label>
+
+    <span class="toggle-text" id="toggle_text">
+      QR + Código de barras
+    </span>
+  </div>
+
+  <button onclick="Create_Results()">Generar códigos 🚀</button>
+</section>
     <div class="nav_buttons">
       <button id="scroll_up">⬆</button>
       <button id="scroll_down">⬇</button>
